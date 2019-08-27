@@ -1,3 +1,15 @@
+<?php 
+    $data = file_get_contents('data/pizza.json');
+
+    // menjadikan data json menjadi array
+    $menu = json_decode($data, true);
+
+    //mengeluarkan key menu
+    $menu = $menu['menu'];
+
+
+ ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,22 +23,49 @@
     <title>CodeKita - Hut</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-        <img src="img/logo.png" alt="">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="#">Features</a>
-        <a class="nav-item nav-link" href="#">Pricing</a>
-        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" alt="" width="120">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">All Menu <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Pizza</a>
+                <a class="nav-item nav-link" href="#">Pricing</a>
+                
+                </div>
+            </div>
         </div>
-    </div>
     </nav>
+    
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col">
+                <h1>All Menu</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <?php foreach($menu as $row) : ?>
+            <div class="col-md-4 mt-2">
+                <div class="card" style="width: 18rem;">
+                  <img src="img/pizza/<?= $row["gambar"]  ?>" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title"><?= $row["nama"]  ?></h5>
+                        <p class="card-text"><?= $row["deskripsi"]  ?></p>
+                        <h5 class="card-title"><?= $row["harga"]  ?></h5>
+                        <a href="#" class="btn btn-primary">Pesan Sekarang!</a>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>    
+    </div>
+
 
     
     <script
